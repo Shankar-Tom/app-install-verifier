@@ -4,7 +4,6 @@ namespace Shankar\AppInstallVerifier;
 
 use Illuminate\Support\ServiceProvider;
 use  Shankar\AppInstallVerifier\Http\Middleware\InstallCheck;
-use Illuminate\Routing\Router;
 
 class AppInstallVerifierServiceProvider extends ServiceProvider
 {
