@@ -18,7 +18,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Shankar\\AppInstallVerifier\\AppInstallVerifierServiceProvider"
+                "shankar\\src\\AppInstallVerifierServiceProvider"
             ]
         }
     },

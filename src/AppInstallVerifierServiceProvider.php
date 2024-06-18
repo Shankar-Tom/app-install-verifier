@@ -4,7 +4,7 @@ namespace Shankar\AppInstallVerifier;
 
 use Illuminate\Support\ServiceProvider;
 
-class MyPackageServiceProvider extends ServiceProvider
+class AppInstallVerifier extends ServiceProvider
 {
     public function boot()
     {
