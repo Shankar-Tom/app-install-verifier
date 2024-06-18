@@ -12,7 +12,7 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\MyPackage\\": "src/"
+            "Shankar\\AppInstallVerifier\\": "src/"
         }
     },
     "extra": {
