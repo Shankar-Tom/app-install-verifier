@@ -21,7 +21,5 @@
                 "Shankar\\AppInstallVerifier\\AppInstallVerifierServiceProvider"
             ]
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
