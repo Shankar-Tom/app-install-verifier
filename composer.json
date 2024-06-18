@@ -1,8 +1,15 @@
 {
     "name": "shankar/app-installer-verifier",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Shankar Gorai",
+            "email": "shankargoraise@gmail.com"
+        }
+    ],
     "require": {
-        "php": "^7.4|^8.0"
+        "php": "^7.4|^8.0",
+        "shankar/app-installer-verifier": "dev-master"
     },
     "autoload": {
         "psr-4": {
