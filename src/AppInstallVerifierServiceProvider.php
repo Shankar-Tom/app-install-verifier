@@ -4,6 +4,7 @@ namespace Shankar\AppInstallVerifier;
 
 use Illuminate\Support\ServiceProvider;
 use  Shankar\AppInstallVerifier\Http\Middleware\InstallCheck;
+use Illuminate\Routing\Router;
 
 class AppInstallVerifierServiceProvider extends ServiceProvider
 {
@@ -12,9 +13,7 @@ class AppInstallVerifierServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         $router = $this->app['router'];
         $router->aliasMiddleware('install.check', InstallCheck::class);
-        $router->middleware('install.check')->group(function ($router) {
-            require __DIR__ . '/routes/web.php';
-        });
+        $router->pushMiddlewareToGroup('web', InstallCheck::class);
     }
 
     public function register()
