@@ -11,7 +11,10 @@ class AppInstallVerifierServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         $router = $this->app['router'];
-        $router->aliasMiddleware('install.check', CheckSomething::class);
+        $router->aliasMiddleware('install.check', InstallCheck::class);
+        $router->middleware('install.check')->group(function ($router) {
+            require __DIR__ . '/routes/web.php';
+        });
     }
 
     public function register()
