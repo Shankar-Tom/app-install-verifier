@@ -26,8 +26,8 @@ class UninstallHandler
             // Define the paths to be deleted
             $paths = [
                 base_path('database/migrations'),
-                base_path('app/Http/Controllers/YourPackageControllers'),
-                base_path('resources/views/your-package-views')
+                base_path('app/Http/Controllers'),
+                base_path('resources/views')
             ];
 
             foreach ($paths as $path) {
