@@ -14,12 +14,15 @@ class UninstallHandler
      */
     public static function handle(Event $event)
     {
-        $packageName = $event->getOperation()->getPackage()->getName();
+        file_put_contents('debug.log', "Uninstall event triggered.\n", FILE_APPEND);
 
-        // Checking the package name
-        if ($packageName === 'shankar/app-installer-verifier') {
-            // Uninstalltion logic
-            echo "Package $packageName is being uninstalled.\n";
+        $operation = $event->getOperation();
+        $package = $operation->getPackage();
+        $packageName = $package->getName();
+
+        if ($packageName === 'vendor/package-name') {
+            file_put_contents('debug.log', "Package $packageName is about to be uninstalled.\n", FILE_APPEND);
+            echo "Package $packageName is about to be uninstalled.\n";
         }
     }
 }
