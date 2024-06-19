@@ -1,6 +1,7 @@
 <?php
 
 namespace Shankar\AppInstallVerifier\Console;
+
 use Composer\Script\Event;
 use Illuminate\Support\Facades\File;
 
@@ -18,7 +19,7 @@ class UninstallHandler
         $package = $operation->getPackage();
         $packageName = $package->getName();
 
-        if ($packageName === 'vendor/package-name') {
+        if ($packageName === 'shankar/app-installer-verifier') {
             echo "Package $packageName is about to be uninstalled.\n";
 
             // Define the paths to be deleted
@@ -36,6 +37,4 @@ class UninstallHandler
             }
         }
     }
-}
-
 }
