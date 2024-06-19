@@ -1,6 +1,5 @@
 <?php
-
-namespace  Shankar\AppInstallVerifier\Http\Middleware;
+namespace Shankar\AppInstallVerifier\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

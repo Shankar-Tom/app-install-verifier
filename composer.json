@@ -21,5 +21,10 @@
                 "Shankar\\AppInstallVerifier\\AppInstallVerifierServiceProvider"
             ]
         }
+    },
+    "scripts": {
+        "pre-package-uninstall": [
+            "Shankar\\AppInstallVerifier\\Console\\UninstallHandler::handle"
+        ]
     }
 }
