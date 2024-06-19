@@ -3,7 +3,7 @@
 namespace Shankar\AppInstallVerifier;
 
 use Illuminate\Support\ServiceProvider;
-use Shankar\AppInstallVerifier\Console\Commands\AskUrlCommand;
+
 use  Shankar\AppInstallVerifier\Http\Middleware\InstallCheck;
 
 class AppInstallVerifierServiceProvider extends ServiceProvider
@@ -14,11 +14,6 @@ class AppInstallVerifierServiceProvider extends ServiceProvider
         $router = $this->app['router'];
         $router->aliasMiddleware('install.check', InstallCheck::class);
         $router->pushMiddlewareToGroup('web', InstallCheck::class);
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                AskUrlCommand::class,
-            ]);
-        }
     }
 
     public function register()
