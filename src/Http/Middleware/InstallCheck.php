@@ -12,7 +12,7 @@ class InstallCheck
     public function handle(Request $request, Closure $next)
     {
         $host = $request->getHost();
-        if ($host == 'localhost' || '127.0.0.1') {
+        if ($host == 'localhost' || $host == '127.0.0.1') {
             return  $next($request);
         }
         $verifyUrl = env('VERIFY_URL', 'Not Set');
