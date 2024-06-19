@@ -3,35 +3,36 @@
 namespace Shankar\AppInstallVerifier\Console;
 
 use Composer\Script\Event;
-use Illuminate\Support\Facades\File;
+use Illuminate\Filesystem\Filesystem;
 
 class UninstallHandler
 {
     public static function handle(Event $event)
     {
-        // Bootstrap Laravel
         require __DIR__ . '/../../../../bootstrap/autoload.php';
-        $app = require_once __DIR__ . '/../../../../bootstrap/app.php';
-        $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+        $app = require __DIR__ . '/../../../../bootstrap/app.php';
+        $kernel = $app->make(Kernel::class);
         $kernel->bootstrap();
 
         $operation = $event->getOperation();
-        $package = $operation->getPackage();
+        $package = method_exists($operation, 'getPackage') ? $operation->getPackage() : $operation->getTargetPackage();
         $packageName = $package->getName();
 
-        if ($packageName === 'shankar/app-installer-verifier') {
+        if ($packageName === 'vendor/package-name') {
             echo "Package $packageName is about to be uninstalled.\n";
+
+            $fileSystem = new Filesystem();
 
             // Define the paths to be deleted
             $paths = [
                 base_path('database/migrations'),
-                base_path('app/Http/Controllers'),
-                base_path('resources/views')
+                base_path('app/Http/Controllers/YourPackageControllers'),
+                base_path('resources/views/your-package-views')
             ];
 
             foreach ($paths as $path) {
-                if (File::isDirectory($path)) {
-                    File::deleteDirectory($path);
+                if ($fileSystem->isDirectory($path)) {
+                    $fileSystem->deleteDirectory($path);
                     echo "Deleted directory at $path.\n";
                 }
             }
