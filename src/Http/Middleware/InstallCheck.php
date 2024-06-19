@@ -1,4 +1,5 @@
 <?php
+
 namespace Shankar\AppInstallVerifier\Http\Middleware;
 
 use Closure;
@@ -10,6 +11,10 @@ class InstallCheck
 {
     public function handle(Request $request, Closure $next)
     {
+        $host = $request->getHost();
+        if ($host == 'localhost' || '127.0.0.1') {
+            return  $next($request);
+        }
         $verifyUrl = env('VERIFY_URL', 'Not Set');
         if ($verifyUrl == 'Not Set') {
             abort(400, 'Please set verify url in env file to run the application');
@@ -19,7 +24,7 @@ class InstallCheck
         } else {
             $response =  Http::post($verifyUrl, [
                 'app_name' => env('APP_NAME'),
-                'url' => $request->getHost()
+                'url' => $host,
             ]);
             if ($response->successful()) {
                 $result = $response->json();
