@@ -10,6 +10,7 @@ class AppInstallVerifierServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__ . '/Views', 'appinstallerverifier');
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         $router = $this->app['router'];
         $router->aliasMiddleware('install.check', InstallCheck::class);

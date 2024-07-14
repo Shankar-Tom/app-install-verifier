@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\File;
 
 class InstallCheck
 {
@@ -15,14 +16,17 @@ class InstallCheck
         if ($host == 'localhost' || $host == '127.0.0.1') {
             return  $next($request);
         }
-        $verifyUrl = env('VERIFY_URL', 'Not Set');
-        if ($verifyUrl == 'Not Set') {
-            abort(400, 'Please set verify url in env file to run the application');
-        }
+
         if (Cache::get('app_installed_on_domain') == true) {
             return  $next($request);
         } else {
-            $response =  Http::post($verifyUrl, [
+            $jsonFilePath = base_path('vendor/shankar/app-installer-verifier/src/licence_details.json');
+            if (!File::exists($jsonFilePath)) {
+                return redirect()->route('appinstaller.index');
+            }
+            $jsonData = json_decode(file_get_contents($jsonFilePath), true);
+
+            $response =  Http::post($jsonData['verify_url'], [
                 'app_name' => env('APP_NAME'),
                 'url' => $host,
             ]);

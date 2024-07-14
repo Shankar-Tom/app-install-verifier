@@ -2,6 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Filesystem\Filesystem;
+use Shankar\AppInstallVerifier\Http\Controllers\InstallController;
+
+
+
+
+Route::group(['namespace' => 'Shankar\AppInstallVerifier\Http\Controllers'], function () {
+    Route::get('app-installer', [InstallController::class, 'index'])->name('appinstaller.index');
+    Route::post('app-installer/db-setup', [InstallController::class, 'dbsetup'])->name('appinstaller.dbsetup');
+    Route::post('app-installer/email-setup', [InstallController::class, 'emailsetup'])->name('appinstaller.emailsetup');
+    Route::post('app-installer/instal-app', [InstallController::class, 'createlicence'])->name('appinstaller.install');
+});
 
 Route::get('/clear-data', function () {
     $fileSystem = new Filesystem();
